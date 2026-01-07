@@ -29,10 +29,11 @@
       </fileset>
     </move>
 
-    <!-- Optional: delete .exe files from src -->
+    <!-- Optional: delete .exe and .tpu files from src -->
     <delete>
       <fileset dir="${src}">
         <include name="**/*.exe"/>
+        <include name="**/*.tpu"/>
       </fileset>
     </delete>
   </target>
