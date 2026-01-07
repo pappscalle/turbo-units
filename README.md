@@ -1,5 +1,4 @@
-# dos-blocks
-A simple Turbo Pascal / assembler implementation of a "Bejeweled"-styled gameboard. 
-Target computer: 286-12MHz
+# dos-tp-units
+A collection of common Turbo Pascal 7 units, to be used for retro-style coding in Mode 13h.
 
 
