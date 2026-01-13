@@ -1,4 +1,10 @@
+(*
+  gfx.pas
+
+  Graphics routines for Mode 13h (320x200x256 colors)
+*)
 unit Gfx;
+
 
 {$G+}
 
