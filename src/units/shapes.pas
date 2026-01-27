@@ -108,12 +108,11 @@ asm
   jl @draw
   xchg bx,cx
  @draw:
-  mov ax, ScreenTarget
-  mov es, ax
+  les di, ScreenTarget
   mov ax, [y]
-  mov di, ax
+  mov dx, ax
   shl ax, 8
-  shl di, 6
+  shl dx, 6
   add di, ax
   add di, bx
   mov al, [color]
@@ -134,12 +133,11 @@ asm
   jl  @draw
   xchg bx, cx
  @draw:
-  mov ax, ScreenTarget
-  mov es, ax
+  les di, ScreenTarget
   mov ax, bx
-  mov di, ax
+  mov dx, ax
   shl ax, 8
-  shl di, 6
+  shl dx, 6
   add di, ax
   add di, [x]
   sub cx, bx
