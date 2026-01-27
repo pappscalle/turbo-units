@@ -102,6 +102,9 @@ TODO
 
 procedure HLine(x1, x2, y : integer; color : byte); assembler;
 asm
+  push ds
+  push es
+
   mov bx, [x1]
   mov cx, [x2]
   cmp bx, cx
@@ -114,19 +117,28 @@ asm
   shl ax, 8
   shl dx, 6
   add di, ax
+  add di, dx
   add di, bx
   mov al, [color]
   mov ah, al
   sub cx, bx
+  inc cx
   shr cx, 1
   jnc @loop
   stosb
  @loop:
   rep stosw
+
+  pop es
+  pop ds
 end;
 
 procedure VLine(x, y1, y2 : integer; color : byte); assembler;
 asm
+
+  push ds
+  push es
+
   mov bx, [y1]
   mov cx, [y2]
   cmp bx, cx
@@ -139,14 +151,19 @@ asm
   shl ax, 8
   shl dx, 6
   add di, ax
+  add di, dx
   add di, [x]
   sub cx, bx
+  inc cx
   mov al, [color]
  @loop:
   stosb
   add di, SCREEN_WIDTH - 1
   dec cx
   jnz @loop
+
+  pop es
+  pop ds
 end;
 
 procedure swap(var v1, v2: integer);
