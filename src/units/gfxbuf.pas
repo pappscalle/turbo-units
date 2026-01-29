@@ -16,6 +16,8 @@ procedure InitBuffer;
 procedure DoneBuffer;
 procedure ClearBuffer(color: byte); 
 procedure FlipBuffer; 
+procedure FlipRect(x, y, w, h: integer);
+
 
 implementation
 
@@ -57,6 +59,40 @@ asm
   lds   si, Buffer
   mov   cx, (SCREEN_WIDTH * SCREEN_HEIGHT) / 2
   rep   movsw
+  pop   es
+  pop   ds
+end;
+
+procedure FlipRect(x, y, w, h: integer); assembler;
+asm
+  push  ds
+  push  es
+
+  mov   ax, SCREEN
+  mov   es, ax
+
+  lds   si, Buffer  
+  mov   ax, [y]
+  mov   dx, ax
+  shl   ax, 8
+  shl   dx, 6
+  add   ax, dx
+  add   ax, [x]
+
+  add   si, ax
+  mov   di, ax
+
+  @loop:
+  mov   cx, [w]
+  rep   movsb
+
+  add   si, 320
+  sub   si, [w]
+  add   di, 320
+  sub   di, [w]
+  dec   [h] 
+  jnz   @loop
+
   pop   es
   pop   ds
 end;
